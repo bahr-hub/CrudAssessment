@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudAssessment.Server", "Server\CrudAssessment.Server.csproj", "{7EE5C95D-585F-4FF3-A162-C119DB2A32A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudAssessment.Server", "Server\CrudAssessment.Server.csproj", "{7EE5C95D-585F-4FF3-A162-C119DB2A32A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudAssessment.Client", "Client\CrudAssessment.Client.csproj", "{7BD586FB-1304-4CE9-81D1-4A16656DC239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudAssessment.Client", "Client\CrudAssessment.Client.csproj", "{7BD586FB-1304-4CE9-81D1-4A16656DC239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudAssessment.Shared", "Shared\CrudAssessment.Shared.csproj", "{4A79A7B9-1774-4528-AD51-2558988CAB61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudAssessment.Shared", "Shared\CrudAssessment.Shared.csproj", "{4A79A7B9-1774-4528-AD51-2558988CAB61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
