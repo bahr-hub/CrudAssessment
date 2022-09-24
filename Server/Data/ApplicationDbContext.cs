@@ -3,27 +3,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CrudAssessment.Server.Data
 {
-    public class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
 
-        public DbSet<UserInfo> UserInformation => Set<UserInfo>();
+        public virtual  DbSet<UserInfo> UserInform { get; set; } = null!;
 
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserInfo>(entity =>
             {
-                entity.ToTable("UserInfo");
+                entity.ToTable("Users");
                 entity.HasKey(e => e.UserPk);
 
                 entity.Property(x => x.UserName)
                 .IsRequired()
                 .HasMaxLength(100)
-                .HasColumnName("FirstName");
+                .HasColumnName("UserName");
 
                 entity.Property(x => x.Email)
                 .IsRequired()
@@ -63,7 +63,10 @@ namespace CrudAssessment.Server.Data
                 .HasDefaultValueSql("(CONVERT([bigint],(0)))").HasColumnName("DeleteDateStamp");
 
             });
+            OnModelCreatingPartial(modelBuilder);
         }
 
+       partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        
     }
 }
