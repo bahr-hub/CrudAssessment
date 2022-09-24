@@ -3,15 +3,20 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using CrudAssessment.Shared.Models;
-
+using CrudAssessment.Server.Interfaces;
+using CrudAssessment.Server.Services;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddScoped<IValidator<UserInfo>, UserValidator>();
+builder.Services.AddTransient<IUser, UserManager>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages(); 
-builder.Services.AddScoped<IValidator<UserInfo>, UserValidator>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -20,6 +25,17 @@ builder.Services.AddDbContextFactory<ApplicationDbContext>(options => options
    .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
    ServiceLifetime.Scoped
    );
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = false;
+    options.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = 401;
+        return Task.CompletedTask;
+    };
+});
 
 var app = builder.Build();
 
@@ -44,6 +60,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

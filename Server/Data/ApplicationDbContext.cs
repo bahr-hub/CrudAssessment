@@ -1,9 +1,11 @@
-﻿using CrudAssessment.Shared.Models;
+﻿using CrudAssessment.Server.Services;
+using CrudAssessment.Shared.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrudAssessment.Server.Data
 {
-    public partial class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
         {
@@ -67,6 +69,7 @@ namespace CrudAssessment.Server.Data
                 .HasDefaultValueSql("(CONVERT([bigint],(0)))").HasColumnName("DeleteDateStamp");
 
             });
+            base.OnModelCreating(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 
