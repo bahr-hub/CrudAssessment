@@ -22,10 +22,10 @@
 </div>
 @code{
     [CascadingParameter]
-    Task<AuthenticationState> AuthenticationState { get; set; }
+    Task<AuthenticationState>? authenticationState { get; set; }
     protected override async Task OnParametersSetAsync()
     {
-        if (!(await AuthenticationState).User.Identity.IsAuthenticated)
+        if (!(await authenticationState).User.Identity.IsAuthenticated)
         {
             navigationManager.NavigateTo("/login");
         }
