@@ -20,6 +20,10 @@
     <InputText id="inputEmail" class="form-control" placeholder="Email" autofocus @bind-Value="@registerRequest.Email" />
     <ValidationMessage For="@(() => registerRequest.Email)" />
 
+        <label for="inputUsername" class="sr-only">User Phone</label>
+    <InputText type="number" id="inputPhone" class="form-control" placeholder="PhoneNumber" autofocus @bind-Value="@registerRequest.PhoneNumber" />
+    <ValidationMessage For="@(() => registerRequest.PhoneNumber)" /> 
+
     <label for="inputPassword" class="sr-only">Password</label>
     <InputText type="password" id="inputPassword" class="form-control" placeholder="Password" @bind-Value="@registerRequest.Password" />
     <ValidationMessage For="@(() => registerRequest.Password)" />
