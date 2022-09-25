@@ -1,5 +1,6 @@
 ﻿using CrudAssessment.Server.Services;
 using CrudAssessment.Shared.DataModels;
+using CrudAssessment.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace CrudAssessment.Server.Controllers
 
         //Login 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IActionResult> Login(UserInfo request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null) return BadRequest("User does not exist");
@@ -33,13 +34,13 @@ namespace CrudAssessment.Server.Controllers
 
         //Register 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterRequest parameters)
+        public async Task<IActionResult> Register(UserInfo parameters)
         {
             var user = new ApplicationUser();
             user.UserName = parameters.UserName;
             var result = await _userManager.CreateAsync(user, parameters.Password);
             if (!result.Succeeded) return BadRequest(result.Errors.FirstOrDefault()?.Description);
-            return await Login(new LoginRequest
+            return await Login(new UserInfo
             {
                 UserName = parameters.UserName,
                 Password = parameters.Password
@@ -57,9 +58,9 @@ namespace CrudAssessment.Server.Controllers
 
         //Current User
         [HttpGet]
-        public CurrentUser CurrentUserInfo()
+        public UserInfo CurrentUserInfo()
         {
-            return new CurrentUser
+            return new UserInfo
             {
                 IsAuthenticated = User.Identity.IsAuthenticated,
                 UserName = User.Identity.Name,

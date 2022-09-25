@@ -15,6 +15,7 @@ namespace CrudAssessment.Shared.Models
 
         public string Password { get; set; }
         public string PasswordHash { get; set; }
+        public string PasswordConfirm { get; set; }
 
 
         public DateTime CreationDate { get; set; }
@@ -29,6 +30,10 @@ namespace CrudAssessment.Shared.Models
         public DateTime? DeleteDate { get; set; }
         public long DeleteDateStamp { get; set; }
 
-        public string? Token { get; set; }
+        public bool IsAuthenticated { get; set; }
+        public bool RememberMe { get; set; }
+        public Dictionary<string, string> Claims { get; set; }
+
+
     }
 }
